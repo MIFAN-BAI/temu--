@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEMU 游客跳转链接构建器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      padding: 0.7rem 1.5rem;
+      background: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .output {
+      margin-top: 1rem;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔗 TEMU 游客跳转构建器</h2>
+    <label for="linkInput">粘贴商品链接：</label>
+    <input type="text" id="linkInput" placeholder="https://www.temu.com/..." />
+    <button onclick="generateLink()">生成跳转链接</button>
+    <div class="output" id="outputLink"></div>
+  </div>
+
+  <script>
+    function generateLink() {
+      const input = document.getElementById('linkInput').value.trim();
+      const base = 'https://www.temu.com/';
+      if (!input.startsWith(base)) {
+        alert('请输入有效的 TEMU 商品链接。');
+        return;
+      }
+
+      // 模拟游客跳转参数
+      const guestParams = 'utm_source=facebook&utm_medium=cpc&utm_campaign=guest_entry&ref=guest_checkout&from=ad';
+
+      const newUrl = input.includes('?') ? input + '&' + guestParams : input + '?' + guestParams;
+
+      document.getElementById('outputLink').innerHTML = `
+        ✅ 跳转链接已生成：<br/>
+        <a href="${newUrl}" target="_blank">${newUrl}</a>
+      `;
+    }
+  </script>
+</body>
+</html>
